@@ -1,16 +1,18 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\SiteContato;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(SiteContato::class, function (Faker $faker) {
-    return [
-        'nome' => $faker->name,
-        'telefone' => $faker->tollFreePhoneNumber,
-        'email' => $faker->unique()->email,
-        'motivo_contato' => $faker->numberBetween(1,3),
-        'mensagem' => $faker->text(200)
-    ];
-});
+class SiteContatoFactory extends Factory
+{
+    public function definition(): array {
+        return [
+            'nome' => fake()->name,
+            'telefone' => fake()->tollFreePhoneNumber,
+            'email' => fake()->unique()->email,
+            'motivo_contato' => fake()->numberBetween(1,3),
+            'mensagem' => fake()->text(200)
+        ];
+    }
+}

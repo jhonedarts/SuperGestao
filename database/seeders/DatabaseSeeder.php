@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(FornecedorSeeder::class);
-        $this->call(SiteContatoSeeder::class);
+        $this->call([
+            FornecedorSeeder::class,
+            MotivoContatoSeeder::class,
+            //SiteContatoSeeder::class,
+        ]);
     }
 }
