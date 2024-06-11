@@ -11,7 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->appendToGroup('web', [
+            \App\Http\Middleware\LogAcessoMiddleware::class,
+        ]);
+
+        $middleware->alias([
+            'log.acesso' => \App\Http\Middleware\LogAcessoMiddleware::class,
+            'autenticacao' => \App\Http\Middleware\AutenticacaoMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
