@@ -6,13 +6,15 @@ Route::get('/', 'App\Http\Controllers\PrincipalController@principal')->name('sit
 Route::get('/sobre-nos', 'App\Http\Controllers\SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contato', 'App\Http\Controllers\ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'App\Http\Controllers\ContatoController@salvar')->name('site.contato');
-Route::get('/login', 'LoginController@index')->name('site.login');
-Route::post('/login', 'LoginController@autenticar')->name('site.login');
+Route::get('/login/{erro?}', 'App\Http\Controllers\LoginController@index')->name('site.login');
+Route::post('/login', 'App\Http\Controllers\LoginController@autenticar')->name('site.login');
 
 Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(function() {
-    Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
-    Route::get('/fornecedores', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedores');
-    Route::get('/produtos', function(){return 'produtos';})->name('app.produtos');
+    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('app.home');
+    Route::get('/sair', 'App\Http\Controllers\LoginController@sair')->name('app.sair');
+    Route::get('/cliente', 'App\Http\Controllers\ClienteController@index')->name('app.cliente');
+    Route::get('/fornecedor', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
+    Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
 });
 
 Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste')->name('site.teste');
