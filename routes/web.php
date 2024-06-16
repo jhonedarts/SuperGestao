@@ -13,8 +13,14 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('app.home');
     Route::get('/sair', 'App\Http\Controllers\LoginController@sair')->name('app.sair');
     Route::get('/cliente', 'App\Http\Controllers\ClienteController@index')->name('app.cliente');
-    Route::get('/fornecedor', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
     Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
+
+    Route::prefix('/fornecedor')->group(function() {
+        Route::get('/', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
+        Route::post('/listar', 'App\Http\Controllers\FornecedorController@listar')->name('app.fornecedor.listar');
+        Route::get('/adicionar', 'App\Http\Controllers\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+        Route::post('/adicionar', 'App\Http\Controllers\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+    });
 });
 
 Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste')->name('site.teste');
